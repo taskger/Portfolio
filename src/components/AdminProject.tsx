@@ -10,11 +10,11 @@ interface Post {
   figmalink:string;
   demolink:string;
 }
-import axios from 'axios'
+// import axios from 'axios'
 import Button from '@/components/ui/Button'
 import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react'
 import ImageSlide from '@/components/ui/ImageSlide'
-import { Router } from 'next/navigation'
+// import { Router } from 'next/navigation'
 import { createClient } from '@libsql/client'
 
 interface Post {
