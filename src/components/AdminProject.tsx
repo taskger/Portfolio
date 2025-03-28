@@ -15,6 +15,26 @@ import Button from '@/components/ui/Button'
 import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react'
 import ImageSlide from '@/components/ui/ImageSlide'
 import { Router } from 'next/navigation'
+import { createClient } from '@libsql/client'
+
+interface Post {
+  id: string;
+  name: string;
+  tool: string;
+  image: string;
+  githublink: string;
+  figmalink:string;
+  demolink:string;
+}
+
+function getDatabaseClient() {
+  const client  = createClient({
+    url:  "libsql://portfolio-taskger.aws-ap-south-1.turso.io",
+    authToken: "eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCJ9.eyJhIjoicnciLCJpYXQiOjE3NDMxNjE4ODIsImlkIjoiMTgxZTczMDgtNWFlYy00YTRhLTgwMmItYjJhYWU0MGEzMTIwIiwicmlkIjoiYTM2NDQ0YzEtMDA0OS00YmQ3LWJkZjEtZjBhYTA5NjQ1OGFiIn0.XZTtBfo5x-PNfO8OeKdNMl2XfaS4DOOEkmmazcTZFb5joHALq3MiA9Ewyn95d5WDuX95huOB9Zq_M3KBWnuJCA",
+  });
+
+  return client;
+}
 
 function AdminSkill() {
   const [posts , setPosts] = useState<Post[]>([]);
@@ -40,14 +60,18 @@ function AdminSkill() {
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault()
     try{
-        await axios.post('/api/project', {
-        name,
-        tool,
-        image,
-        githublink,
-        figmalink,
-        demolink
-        })
+    
+        const client = getDatabaseClient() 
+        await client.execute({
+          sql: `INSERT INTO project (name, tool, image, githublink, figmalink, demolink) 
+           VALUES ($name, $tool, $image, $githublink, $figmalink, $demolink)`,
+          args: { name,
+            tool,
+            image,
+            githublink,
+            figmalink,
+            demolink },
+        }) 
         setOpenProjectCreate(false)
         fetchPosts();
     } catch (error) {
@@ -57,18 +81,23 @@ function AdminSkill() {
     console.log('name',name)
   }
   
-  const fetchPosts = async ()  => {
-    try{
-      const response = await axios.get('/api/project')
-      setPosts(response.data)
-    }catch (error) {
-      console.log('error',error)
+  const fetchPosts = async () => {
+    try {
+      const client = getDatabaseClient() 
+      const response = await client.execute("SELECT * FROM project") 
+      setPosts(response.rows)  
+    } catch (error) {
+      console.log('Error fetching posts:', error)
     }
   }
   
   const fetchDelete = async (id: string)  => {
     try{
-      await axios.delete(`/api/project/${id}`)
+      const client = getDatabaseClient() 
+      await client.execute({
+        sql:"DELETE FROM project WHERE id  = $id",
+        args:{id}
+      })
       setOpenProjectDelete(false)
       fetchPosts(); 
     }catch (error) {
@@ -84,15 +113,19 @@ function AdminSkill() {
   
   const fetchEdit = async (post: Post)  => {
     try{
-      await axios.patch(`/api/project/${post.id}`, {
-        name: post.name,  
-        tool: post.tool,
-        image: post.image,
-        githublink: post.githublink,
-        figmalink: post.figmalink,
-        demolink: post.demolink,
-
-        })
+        const client = getDatabaseClient() 
+        await client.execute({
+          sql: `UPDATE project SET name = $name,tool =  $tool,image =  $image,
+          githublink = $githublink,figmalink =  $figmalink,demolink =  $demolink WHERE id = $id`,
+          args: {
+            id:post.id ,
+            name: post.name,  
+            tool: post.tool,
+            image: post.image,
+            githublink: post.githublink,
+            figmalink: post.figmalink,
+            demolink: post.demolink},
+        }) 
         setOpenProjectEdit(false)
         fetchPosts(); 
     }catch (error) {

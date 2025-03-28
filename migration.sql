@@ -1,0 +1,29 @@
+-- CreateTable
+CREATE TABLE "Skill" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "name" TEXT NOT NULL,
+    "icon" TEXT NOT NULL,
+    "createDate" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+-- CreateTable
+CREATE TABLE "Project" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "name" TEXT NOT NULL,
+    "tool" TEXT NOT NULL,
+    "image" TEXT NOT NULL,
+    "githublink" TEXT NOT NULL,
+    "figmalink" TEXT NOT NULL,
+    "demolink" TEXT NOT NULL,
+    "createDate" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+-- CreateTable
+CREATE TABLE "User" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "user" TEXT NOT NULL,
+    "pass" TEXT NOT NULL,
+    "createDate" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "loginLast" DATETIME NOT NULL
+);
+

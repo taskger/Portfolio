@@ -1,16 +1,25 @@
 'use client'
 import React,{useEffect,useState} from 'react'
 
+
+import axios from 'axios'
+import Button from '@/components/ui/Button'
+import ButtonIconSkill from '@/components/ui/ButtonIconSkill'
+import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react'
+import { createClient } from '@libsql/client'
 interface Post {
   id: string;
   name: string;
   icon: string;
 }
-import axios from 'axios'
-import Button from '@/components/ui/Button'
-import ButtonIconSkill from '@/components/ui/ButtonIconSkill'
-import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react'
+function getDatabaseClient() {
+  const client  = createClient({
+    url:  "libsql://portfolio-taskger.aws-ap-south-1.turso.io",
+    authToken: "eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCJ9.eyJhIjoicnciLCJpYXQiOjE3NDMxNjE4ODIsImlkIjoiMTgxZTczMDgtNWFlYy00YTRhLTgwMmItYjJhYWU0MGEzMTIwIiwicmlkIjoiYTM2NDQ0YzEtMDA0OS00YmQ3LWJkZjEtZjBhYTA5NjQ1OGFiIn0.XZTtBfo5x-PNfO8OeKdNMl2XfaS4DOOEkmmazcTZFb5joHALq3MiA9Ewyn95d5WDuX95huOB9Zq_M3KBWnuJCA",
+  });
 
+  return client;
+}
 function AdminSkill() {
   const [posts , setPosts] = useState<Post[]>([]);
   const [openSkillDelete , setOpenSkillDelete] = useState(false)
@@ -27,10 +36,12 @@ function AdminSkill() {
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault()
     try{
-        await axios.post('/api/skill', {
-        name,
-        icon
-        })
+        const client = getDatabaseClient() 
+        await client.execute({
+          sql: `INSERT INTO Skill (name, icon)  VALUES ($name, $icon)`,
+          args: { name,icon },
+        }) 
+
         setOpenSkillCreate(false)
         fetchPosts();
     } catch (error) {
@@ -40,25 +51,65 @@ function AdminSkill() {
     console.log('name',name)
     console.log('icon',icon)
   }
-  
-  const fetchPosts = async ()  => {
-    try{
-      const response = await axios.get('/api/skill')
-      setPosts(response.data)
-    }catch (error) {
-      console.log('error',error)
+
+  // const handleSubmit = async (event: React.FormEvent) => {
+  //   event.preventDefault()
+  //   try{
+  //       await axios.post('/api/skill', {
+  //       name,
+  //       icon
+  //       })
+  //       setOpenSkillCreate(false)
+  //       fetchPosts();
+  //   } catch (error) {
+  //     console.log('error', error)
+  //     alert('something went wrong')
+  //   }
+  //   console.log('name',name)
+  //   console.log('icon',icon)
+  // }
+
+  const fetchPosts = async () => {
+    try {
+      const client = getDatabaseClient() 
+      const response = await client.execute("SELECT * FROM skill") 
+      setPosts(response.rows)  
+    } catch (error) {
+      console.log('Error fetching posts:', error)
     }
   }
-  
+  // const fetchPosts = async ()  => {
+  //   try{
+  //     const response = await axios.get('/api/skill')
+  //     setPosts(response.data)
+  //   }catch (error) {
+  //     console.log('error',error)
+  //   }
+  // }
+
   const fetchDelete = async (id: string)  => {
     try{
-      await axios.delete(`/api/skill/${id}`)
+      const client = getDatabaseClient() 
+      await client.execute({
+        sql:"DELETE FROM skill WHERE id  = $id",
+        args:{id}
+      }) 
       setOpenSkillDelete(false)
       fetchPosts(); 
     }catch (error) {
       console.log('error',error)
     }
   }
+  // const fetchDelete = async (id: string)  => {
+  //   try{
+  //     await axios.delete(`/api/skill/${id}`)
+  //     setOpenSkillDelete(false)
+  //     fetchPosts(); 
+  //   }catch (error) {
+  //     console.log('error',error)
+  //   }
+  // }
+
 
   const setDelete = (post: Post) => {
     setdeleteId(post.id);
@@ -68,16 +119,29 @@ function AdminSkill() {
   
   const fetchEdit = async (post: Post)  => {
     try{
-      await axios.patch(`/api/skill/${post.id}`, {
-        name: post.name,
-        icon: post.icon
-        })
+        const client = getDatabaseClient() 
+        await client.execute({
+          sql: `UPDATE skill SET name = $name,icon =  $icon WHERE id = $id`,
+          args: { name:post.name , icon:post.icon , id:post.id },
+        }) 
         setOpenSkillEdit(false)
         fetchPosts(); 
     }catch (error) {
       console.log('error',error)
     }
   }
+  // const fetchEdit = async (post: Post)  => {
+  //   try{
+  //     await axios.patch(`/api/skill/${post.id}`, {
+  //       name: post.name,
+  //       icon: post.icon
+  //       })
+  //       setOpenSkillEdit(false)
+  //       fetchPosts(); 
+  //   }catch (error) {
+  //     console.log('error',error)
+  //   }
+  // }
 
   const setEdit = (post: Post) => {
     seteditId(post.id);
