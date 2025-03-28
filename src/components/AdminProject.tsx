@@ -1,15 +1,6 @@
 'use client'
 import React,{useEffect,useState} from 'react'
 
-interface Post {
-  id: string;
-  name: string;
-  tool: string;
-  image: string;
-  githublink: string;
-  figmalink:string;
-  demolink:string;
-}
 // import axios from 'axios'
 import Button from '@/components/ui/Button'
 import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react'
