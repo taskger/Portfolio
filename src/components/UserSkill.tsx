@@ -12,10 +12,14 @@ function getDatabaseClient() {
 
   return client;
 }
-
+interface Post {
+  id: string;
+  name: string;
+  icon: string;
+}
 function UserSkill() {
 
-  const [posts, setPosts] = useState<any[]>()
+  const [posts, setPosts] = useState<Post[]>()
 
   const fetchPosts = async () => {
     try {

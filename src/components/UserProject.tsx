@@ -1,6 +1,6 @@
 'use client'
 import React,{useEffect,useState} from 'react'
-import axios from 'axios'
+// import axios from 'axios'
 import ImageSlide from '@/components/ui/ImageSlide'
 
 import { createClient } from '@libsql/client'
@@ -13,9 +13,17 @@ function getDatabaseClient() {
 
   return client;
 }
-
+interface Post {
+  id: string;
+  name: string;
+  tool: string;
+  image: string;
+  githublink: string;
+  figmalink:string;
+  demolink:string;
+}
 function UserProject() {
-  const [posts, setPosts] = useState<any[]>()
+  const [posts, setPosts] = useState<Post[]>()
   
     const fetchPosts = async () => {
       try {

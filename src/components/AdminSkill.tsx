@@ -2,7 +2,7 @@
 import React,{useEffect,useState} from 'react'
 
 
-import axios from 'axios'
+// import axios from 'axios'
 import Button from '@/components/ui/Button'
 import ButtonIconSkill from '@/components/ui/ButtonIconSkill'
 import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react'

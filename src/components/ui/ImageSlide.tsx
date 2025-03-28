@@ -1,12 +1,11 @@
 "use client"
-import React,  {useState} from 'react'
+import React from 'react'
 import Image from 'next/image'
 import Button from '@/components/ui/Button'
 import '@/app/globals.css'
 interface ImageProps {
   src?: string;
   alt?: string;
-  name?: string;
   width?: number | string;
   height?: number | string;
   className?: string;
@@ -19,7 +18,6 @@ interface ImageProps {
 const ImageSlide: React.FC<ImageProps> = ({
   src = "",
   alt = "",
-  name = "",
   width = 0,
   height = 0,
   className= "",
