@@ -173,7 +173,7 @@ function AdminSkill() {
                     <div className=" sm:items-start">
                       
                       <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                      <DialogTitle>Edit Skill</DialogTitle>
+                      <DialogTitle>Edit Project</DialogTitle>
                         <div className="mt-2">
 
                           <p className="text-gray-500">
@@ -276,7 +276,7 @@ function AdminSkill() {
           {Array.isArray(posts) && posts.length > 0 ? (
             posts.map((post, index: number) => (
               <div key={index} className='slide'>
-                <Button onClick={() => setDelete(post)}size="icon" variant="cancle">X</Button>
+                <Button className='deleteProject' onClick={() => setDelete(post)}size="icon" variant="cancle">X</Button>
                 <ImageSlide
                     className='slideImage'
                     src={post.image}
@@ -353,7 +353,7 @@ function AdminSkill() {
                   <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                     <div className="sm:flex sm:items-start">
                       <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                      <DialogTitle>Create Skill</DialogTitle>
+                      <DialogTitle>Create Project</DialogTitle>
                         <div className="mt-2">
                           <p className="text-gray-500">
                             <input className="input-box" 
