@@ -74,7 +74,13 @@ function AdminSkill() {
     try {
       const client = getDatabaseClient() 
       const response = await client.execute("SELECT * FROM skill") 
-      setPosts(response.rows)  
+      const posts: Post[] = response.rows.map((row: any) => ({
+        id: row.id,      
+        name: row.name,
+        icon: row.tool,
+      }));
+
+      setPosts(posts)  
     } catch (error) {
       console.log('Error fetching posts:', error)
     }

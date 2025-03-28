@@ -76,7 +76,18 @@ function AdminSkill() {
     try {
       const client = getDatabaseClient() 
       const response = await client.execute("SELECT * FROM project") 
-      setPosts(response.rows)  
+      // สมมติว่าคุณต้องการแปลง Row เป็น Post
+      const posts: Post[] = response.rows.map((row: any) => ({
+        id: row.id,         // แปลงข้อมูลตามที่จำเป็น
+        name: row.name,
+        tool: row.tool,
+        image: row.image,
+        githublink: row.githublink, // Ensure all required properties are included
+        figmalink: row.figmalink,
+        demolink: row.demolink,
+      }));
+
+      setPosts(posts);
     } catch (error) {
       console.log('Error fetching posts:', error)
     }
