@@ -15,8 +15,9 @@ interface Post {
 function getDatabaseClient() {
   const client  = createClient({
     url:  "libsql://portfolio-taskger.aws-ap-south-1.turso.io",
-    authToken: "eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCJ9.eyJhIjoicnciLCJpYXQiOjE3NDMxNjE4ODIsImlkIjoiMTgxZTczMDgtNWFlYy00YTRhLTgwMmItYjJhYWU0MGEzMTIwIiwicmlkIjoiYTM2NDQ0YzEtMDA0OS00YmQ3LWJkZjEtZjBhYTA5NjQ1OGFiIn0.XZTtBfo5x-PNfO8OeKdNMl2XfaS4DOOEkmmazcTZFb5joHALq3MiA9Ewyn95d5WDuX95huOB9Zq_M3KBWnuJCA",
+    authToken: process.env.NEXT_PUBLIC_TURSO_AUTH_TOKEN!,
   });
+  console.log(process.env.TURSO_AUTH_TOKEN)
 
   return client;
 }
