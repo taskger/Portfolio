@@ -1,0 +1,8 @@
+-- CreateTable
+CREATE TABLE "User" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "user" TEXT NOT NULL,
+    "pass" TEXT NOT NULL,
+    "createDate" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "loginLast" DATETIME NOT NULL
+);
