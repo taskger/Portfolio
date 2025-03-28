@@ -77,14 +77,14 @@ function AdminSkill() {
       const client = getDatabaseClient() 
       const response = await client.execute("SELECT * FROM project") 
       // สมมติว่าคุณต้องการแปลง Row เป็น Post
-      const posts: Post[] = response.rows.map((row: any) => ({
-        id: row.id,         // แปลงข้อมูลตามที่จำเป็น
-        name: row.name,
-        tool: row.tool,
-        image: row.image,
-        githublink: row.githublink, // Ensure all required properties are included
-        figmalink: row.figmalink,
-        demolink: row.demolink,
+      const posts: Post[] = response.rows.map((row) => ({
+        id: row.id  as string,         // แปลงข้อมูลตามที่จำเป็น
+        name: row.name  as string,
+        tool: row.tool as string,
+        image: row.image as string,
+        githublink: row.githublink as string, // Ensure all required properties are included
+        figmalink: row.figmalink as string,
+        demolink: row.demolink as string,
       }));
 
       setPosts(posts);

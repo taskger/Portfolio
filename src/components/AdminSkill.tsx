@@ -74,10 +74,10 @@ function AdminSkill() {
     try {
       const client = getDatabaseClient() 
       const response = await client.execute("SELECT * FROM skill") 
-      const posts: Post[] = response.rows.map((row: any) => ({
-        id: row.id,      
-        name: row.name,
-        icon: row.tool,
+      const posts: Post[] = response.rows.map((row) => ({
+        id: row.id as string,
+        name: row.name as string,
+        icon: row.icon as string,
       }));
 
       setPosts(posts)  
