@@ -30,7 +30,7 @@ function Page() {
         <div className="setting">
           <h1 className="setting-title">Setting</h1>
 
-          <Button  onClick={() => logout  } size="icon" variant="outline">Logout</Button>
+          <Button className='logout' onClick={() => logout  } size="icon" variant="outline">Logout</Button>
 
           <div className="setting_skill">
             <AdminSkill />
