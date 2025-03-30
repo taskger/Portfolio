@@ -9,16 +9,12 @@ function Head() {
       <h1 className='h2'>CHAYANON POOLWAS</h1>
       <h1 className='h3'>I am a full stack developer</h1>
       <div className='btn'>
-        <Link href="/pdf/CV-EN.pdf">
+        <Link href="/pdf/resume-en.pdf">
           <Button  className='btn-moon' size="icon" variant="outline">
                 Dowload Resume
           </Button>
         </Link>
-        <Link href="/pdf/CV-EN.pdf">
-          <Button  className='btn-moon' size="icon" variant="outline">
-                Dowload CV
-          </Button>
-        </Link>
+        
       </div>
     </div>
   )
