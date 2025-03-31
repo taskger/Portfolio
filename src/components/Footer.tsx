@@ -10,8 +10,8 @@ function Footer() {
           <div>
             <h1>Contact Me</h1>
             <div>
-              <a>Email : chayanon.poolwas@gmail.com<br></br></a>
-              <a>Phone : 095-026-7339</a>
+              <a href="mailto:chayanon.poolwas@gmail.com">Email : chayanon.poolwas@gmail.com<br></br></a>
+              <a href="tel:095-026-7339">Phone : 095-026-7339</a>
             </div>
             <div className='icon'>
               <a href="https://github.com/taskger">
