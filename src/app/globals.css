@@ -199,12 +199,17 @@ body {
  cursor: pointer;
 }
 /* education */
+#education {
+  padding-top: 10vw;
+}
 .education {
   color: #ffffff;
   text-align: center;
+  padding-top: 2vw;
+  padding-left: 6vw;
+  padding-right: 6vw;
   width: 100%;
   height: auto;
-  padding: 2vw;
   font-size: 2.5vw;
   border-radius: 20px;
 
@@ -266,10 +271,13 @@ body {
   
 } */
 /* Experience */
+#experience {
+  padding-top: 10vw;
+}
 .experience{
   color: white;
   height: max-content;
-  padding: 4vw;
+  padding-top: 2vw;
   padding-left: 6vw;
   padding-right: 6vw;
   border-radius: 2vw;
@@ -349,9 +357,14 @@ body {
   align-items: center;
 }
 /* skill */
+#skill {
+  padding-top: 10vw;
+
+}
 .skill {
   color: #ffffff;
   padding: 2vw;
+  padding-bottom: 2vw ;
   padding-left: 6vw;
   padding-right: 6vw;
   text-align: center;
@@ -408,6 +421,9 @@ body {
 
 
 /* project */
+#project {
+  padding-top: 10vw;
+}
 .project {
   color: #ffffff;
   padding: 2vw;

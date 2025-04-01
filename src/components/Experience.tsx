@@ -3,7 +3,8 @@ import '@/app/globals.css'
 
 function Experience() {
   return (
-    <div className='experience' id='experience'>
+    <div id='experience'>
+    <div className='experience'>
       <h1 className='title'>Experience</h1>
       <div className='exp'>
         <a className='corporate_name_role'>Application Software Developer Intern - SAHACOGEN CHONBURI CO., LTD<br></br></a>
@@ -13,6 +14,7 @@ function Experience() {
         <a className='date'>04/2023 - 06/2023</a>
       </div>
     </div>
+  </div>
   )
 }
 

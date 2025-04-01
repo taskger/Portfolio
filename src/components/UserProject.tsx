@@ -48,7 +48,8 @@ function UserProject() {
     fetchPosts();
   }, []);
   return (
-    <div  className='project' id='project'>
+    <div id='project'>
+    <div  className='project'>
       <div className='project-title'>
         Project
       </div>
@@ -71,6 +72,7 @@ function UserProject() {
           <p>No posts available</p>
         )}
     </div>
+  </div>
   )
 }
 

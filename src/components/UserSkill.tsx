@@ -48,7 +48,8 @@ function UserSkill() {
   }, []);
 
   return (
-    <div className='skill' id='skill'>
+    <div id='skill'>
+    <div className='skill'>
       <h1 className='Skill-Title'>Skill</h1>
       <div className='box-inside'>
         <div className='icon'>
@@ -64,6 +65,7 @@ function UserSkill() {
         </div>
       </div>
     </div>
+  </div>
   )
 }
 
