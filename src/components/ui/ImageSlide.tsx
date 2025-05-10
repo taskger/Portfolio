@@ -39,17 +39,20 @@ const ImageSlide: React.FC<ImageProps> = ({
         />
         <div className='link'>
           <div>
+            {demolink != '#' ? 
             <a href={`${demolink}`}>
               <Button  className='demo' size="sm" variant="primary">
                 DEMO
               </Button>
-            </a>
+            </a>: ''}
+            {figmalink != '#' ? 
             <a href={`${figmalink}`}>
               <Image className='icon' src="/figma.png" alt="github"width={100} height={100}/>
-            </a>
+            </a>: ''}
+            {githublink != '#' ? 
             <a href={`${githublink}`}>
               <Image className='icon' src="/github-icons.svg" alt="github"width={10} height={10}/>
-            </a>
+            </a>: ''}
           </div>
         </div>
         <div className='tool'>
